@@ -20,7 +20,8 @@ slack_signing_secret = os.getenv('SLACK_SIGNING_SECRET')
 client = WebClient(token=slack_token)
 
 # Nombre del archivo con el texto para generar respuestas
-file_name = "informacion.txt"
+# Nombre del archivo con el texto para generar respuestas
+file_name = os.path.join(os.path.dirname(__file__), "informacion.txt")
 
 # Función para cargar el texto desde el archivo
 def cargar_texto_desde_archivo(file_name):
