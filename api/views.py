@@ -11,6 +11,7 @@ from slack_sdk.errors import SlackApiError
 import time
 import json
 
+
 # Inicializar las claves de API de OpenAI y Slack
 openai.api_key = os.getenv('OPENAI_API_KEY')
 slack_token = os.getenv('SLACK_TOKEN')
