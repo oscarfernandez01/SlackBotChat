@@ -20,6 +20,6 @@ from api.views import send_slack_message, handle_slack_events
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('send-message/', send_slack_message, name='send_slack_message'),
     path('slack/events/', handle_slack_events, name='handle_slack_events'),
+    path('send-message/', send_slack_message, name='send_slack_message'),
 ]
