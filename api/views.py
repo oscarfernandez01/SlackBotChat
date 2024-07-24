@@ -16,9 +16,6 @@ slack_token = os.getenv('SLACK_TOKEN')
 slack_signing_secret = os.getenv('SLACK_SIGNING_SECRET')
 
 
-"""slack_token = "xoxb-6820654421574-7450833110530-RCH9XJmImqymlsRoMpCaii4d"
-openai.api_key = "sk-proj-zsybQJsyNcdwNEPJbpPhT3BlbkFJUk6XohDwkVJKK9lqAuML"
-slack_signing_secret = "5caa698fdde726dd9e420bbc8d8e8a7d"""
 
 # Inicializar el cliente de Slack
 client = WebClient(token=slack_token)
