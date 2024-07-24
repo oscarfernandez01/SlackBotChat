@@ -49,7 +49,7 @@ def handle_slack_events(request):
             # Verificar que el evento provenga del canal específico
             if channel == settings.SLACK_CHANNEL_ID:
                 # Filtrar mensajes para que el bot no responda a sí mismo
-                if event.get("subtype") is None and user_id != bot_id:
+                if event.get("subtype") is None and user_id and user_id != bot_id:
                     try:
                         # Generar respuesta utilizando OpenAI
                         response = openai.ChatCompletion.create(
