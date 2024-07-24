@@ -1,1 +1,19 @@
-oscar tiene 30 años y vive en mexico
+En el área de Business Intelligence (BI), podrás encontrar la siguiente información:
+
+    Casos de Éxito: Información detallada sobre los proyectos y soluciones que han tenido un impacto positivo y exitoso. http://bi.beecker.ai/use_cases/
+    Casos de Uso: Ejemplos prácticos de cómo nuestras soluciones pueden ser aplicadas en diferentes escenarios y sectores.
+    Solicitud de Demos: Formulario para solicitar demostraciones personalizadas de nuestros productos y servicios. http://bi.beecker.ai/learn_view/
+    Solicitud de Marketing: Espacio para enviar tus solicitudes relacionadas con material promocional y campañas de marketing. http://bi.beecker.ai/portal_marketing/
+    Espacio de Capacitación: Recursos y programas disponibles para capacitarte y mejorar tus habilidades en el uso de nuestras herramientas y soluciones. http://bi.beecker.ai/learn_view/
+    Revisión de Proyectos: Acceso a la información actualizada sobre cada uno de nuestros proyectos en curso y completados.
+
+Enlaces útiles:
+
+    Página Inicial: http://bi.beecker.ai/home/
+    Registro de Datos de Clientes, Industrias, Departamentos y Casos: http://bi.beecker.ai/register_data/
+    Agentes Autónomos: http://bi.beecker.ai/reusables_cases/
+    Videos de Casos: http://bi.beecker.ai/cases_video/
+
+Presentación Google Slides de Casos de Éxito:
+
+    Invoice Intake: https://docs.google.com/presentation/d/1ONu8SJn3sF9t_8Drw8Nd8qNvawxj253OSjczJ-wL7LY/edit#slide=id.g2828c9ab279_0_78
