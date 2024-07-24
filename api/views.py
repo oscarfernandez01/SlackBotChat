@@ -4,8 +4,8 @@ from slack_sdk.errors import SlackApiError
 from django.conf import settings
 import json
 
-# Inicializar el cliente de Slack con el Bot User OAuth Token
-client = WebClient(token="xoxb-7495939536864-7473046446739-z4zYmhBvN1FTZPtZAUNYsJHq")
+# Inicializar el cliente de Slack con el Bot User OAuth Token desde la configuración
+client = WebClient(token=settings.SLACK_TOKEN)
 
 def send_slack_message(request):
     try:
