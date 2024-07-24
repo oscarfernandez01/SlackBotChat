@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.views import send_slack_message
+from api.views import send_slack_message, handle_slack_events
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('send-message/', send_slack_message, name='send_slack_message'),
+    path('slack/events/', handle_slack_events, name='handle_slack_events'),
 ]
