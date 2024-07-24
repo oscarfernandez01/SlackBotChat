@@ -46,28 +46,26 @@ def handle_slack_events(request):
 
             print(f"Evento recibido: user_id={user_id}, text={text}, channel={channel}")
 
-            # Verificar que el evento provenga del canal específico
-            if channel == settings.SLACK_CHANNEL_ID:
-                # Filtrar mensajes para que el bot no responda a sí mismo
-                if event.get("subtype") is None and user_id and user_id != bot_id:
-                    try:
-                        # Generar respuesta utilizando OpenAI
-                        response = openai.ChatCompletion.create(
-                            model="gpt-4",
-                            messages=[
-                                {"role": "system", "content": texto},
-                                {"role": "user", "content": text}
-                            ]
-                        )
-                        respuesta = response["choices"][0]["message"]["content"].strip()
+            # Verificar que el evento provenga del canal específico y no sea un mensaje de bot
+            if channel == settings.SLACK_CHANNEL_ID and event.get("type") == "message" and event.get("subtype") is None and user_id != bot_id:
+                try:
+                    # Generar respuesta utilizando OpenAI
+                    response = openai.ChatCompletion.create(
+                        model="gpt-4",
+                        messages=[
+                            {"role": "system", "content": texto},
+                            {"role": "user", "content": text}
+                        ]
+                    )
+                    respuesta = response["choices"][0]["message"]["content"].strip()
 
-                        # Enviar respuesta al canal de Slack
-                        slack_response = client.chat_postMessage(channel=channel, text=respuesta)
-                        print(f"Mensaje enviado a {channel}: {respuesta}")
-                    except SlackApiError as e:
-                        print(f"Error enviando mensaje a Slack: {e.response['error']}")
-                    except Exception as e:
-                        print(f"Error generando respuesta de OpenAI: {e}")
+                    # Enviar respuesta al canal de Slack
+                    slack_response = client.chat_postMessage(channel=channel, text=respuesta)
+                    print(f"Mensaje enviado a {channel}: {respuesta}")
+                except SlackApiError as e:
+                    print(f"Error enviando mensaje a Slack: {e.response['error']}")
+                except Exception as e:
+                    print(f"Error generando respuesta de OpenAI: {e}")
 
             return JsonResponse({"status": "ok"})
         except Exception as e:
