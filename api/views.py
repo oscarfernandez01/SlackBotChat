@@ -62,12 +62,15 @@ def handle_slack_events(request):
                     # Enviar respuesta al canal de Slack
                     slack_response = client.chat_postMessage(channel=channel, text=respuesta)
                     print(f"Mensaje enviado a {channel}: {respuesta}")
+                    return JsonResponse({"status": "ok", "message": "Message sent", "response": respuesta})
                 except SlackApiError as e:
                     print(f"Error enviando mensaje a Slack: {e.response['error']}")
+                    return JsonResponse({"status": "error", "message": f"Error sending message: {e.response['error']}"}, status=500)
                 except Exception as e:
                     print(f"Error generando respuesta de OpenAI: {e}")
+                    return JsonResponse({"status": "error", "message": f"Error generating OpenAI response: {e}"}, status=500)
 
-            return JsonResponse({"status": "ok"})
+            return JsonResponse({"status": "ok", "message": "Event received but not processed"})
         except Exception as e:
             print(f"Error procesando solicitud: {e}")
             return JsonResponse({"status": "error", "message": str(e)}, status=500)
