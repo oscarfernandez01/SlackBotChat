@@ -30,7 +30,7 @@ texto = cargar_texto_desde_archivo(file_name)
 @csrf_exempt
 def handle_slack_events(request):
     if request.method == "POST":
-        try:
+        """try:
             payload = json.loads(request.body.decode('utf-8'))
             print(f"Payload recibido: {json.dumps(payload, indent=2)}")
 
@@ -73,7 +73,7 @@ def handle_slack_events(request):
             return JsonResponse({"status": "ok", "message": "Event received but not processed"})
         except Exception as e:
             print(f"Error procesando solicitud: {e}")
-            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)"""
     return JsonResponse({"status": "method not allowed"}, status=405)
 
 @csrf_exempt
