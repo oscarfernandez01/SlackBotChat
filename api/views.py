@@ -1,15 +1,31 @@
+import openai
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 import json
+import os
+# Configura tu clave de API de OpenAI aquí
+openai.api_key = settings.OPENAI_API_KEY
 
 # Inicializar el cliente de Slack con el Bot User OAuth Token desde la configuración
 client = WebClient(token=settings.SLACK_TOKEN)
 
 # ID del bot
 bot_id = settings.BOT_ID
+
+# Nombre del archivo con el texto para generar respuestas
+
+file_name = os.path.join(os.path.dirname(__file__), "informacion.txt")
+
+# Función para cargar el texto desde el archivo
+def cargar_texto_desde_archivo(file_name):
+    with open(file_name, "r", encoding="utf-8") as file:
+        return file.read()
+
+# Cargar el texto desde el archivo
+texto = cargar_texto_desde_archivo(file_name)
 
 @csrf_exempt
 def handle_slack_events(request):
@@ -35,12 +51,24 @@ def handle_slack_events(request):
                 # Filtrar mensajes para que el bot no responda a sí mismo
                 if event.get("subtype") is None and user_id != bot_id:
                     try:
-                        # Enviar "Hola" al canal
-                        response = client.chat_postMessage(channel=channel, text="Hola")
-                        print(f"Mensaje enviado a {channel}: Hola")
+                        # Generar respuesta utilizando OpenAI
+                        response = openai.ChatCompletion.create(
+                            model="gpt-4",
+                            messages=[
+                                {"role": "system", "content": texto},
+                                {"role": "user", "content": text}
+                            ]
+                        )
+                        respuesta = response["choices"][0]["message"]["content"].strip()
+
+                        # Enviar respuesta al canal de Slack
+                        slack_response = client.chat_postMessage(channel=channel, text=respuesta)
+                        print(f"Mensaje enviado a {channel}: {respuesta}")
                     except SlackApiError as e:
                         print(f"Error enviando mensaje a Slack: {e.response['error']}")
-            
+                    except Exception as e:
+                        print(f"Error generando respuesta de OpenAI: {e}")
+
             return JsonResponse({"status": "ok"})
         except Exception as e:
             print(f"Error procesando solicitud: {e}")

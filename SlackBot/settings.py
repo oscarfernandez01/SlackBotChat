@@ -128,6 +128,7 @@ SLACK_TOKEN = os.getenv('SLACK_TOKEN')
 SLACK_SIGNING_SECRET = os.getenv('SLACK_SIGNING_SECRET')
 BOT_ID = os.getenv('BOT_ID')
 SLACK_CHANNEL_ID = os.getenv('SLACK_CHANNEL_ID')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # settings.py
 APPEND_SLASH = False
