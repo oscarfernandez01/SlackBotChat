@@ -47,7 +47,7 @@ def handle_slack_events(request):
             print(f"Evento recibido: user_id={user_id}, text={text}, channel={channel}")
 
             # Verificar que el evento provenga del canal específico y no sea un mensaje de bot
-            if channel == settings.SLACK_CHANNEL_ID and event.get("type") == "message" and event.get("subtype") is None and user_id != bot_id:
+            if bot_id != user_id:
                 try:
                     # Generar respuesta utilizando OpenAI
                     response = openai.ChatCompletion.create(
